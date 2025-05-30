@@ -10,7 +10,6 @@ except Exception as e:
     print("Model .pkl fayli Keras modeli bo'lmasligi mumkin yoki fayl buzilgan.")
     exit()
 
-# Yuklangan obyekt Keras modeli ekanligiga ishonch hosil qiling
 if isinstance(loaded_model_from_pkl, tf.keras.Model):
     print("Model .pkl faylidan muvaffaqiyatli yuklandi.")
 
@@ -20,13 +19,6 @@ if isinstance(loaded_model_from_pkl, tf.keras.Model):
         print("Model muvaffaqiyatli 'malaria_model.h5' fayliga saqlandi.")
     except Exception as e:
         print(f".h5 formatida saqlashda xatolik: {e}")
-
-    # (Tavsiya etiladi) Modelni .keras formatida saqlash
-    # try:
-    #     loaded_model_from_pkl.save("malaria_model.keras")
-    #     print("Model muvaffaqiyatli 'malaria_model.keras' fayliga saqlandi.")
-    # except Exception as e:
-    #     print(f".keras formatida saqlashda xatolik: {e}")
 
 else:
     print("Yuklangan obyekt Keras modeli emas.")
