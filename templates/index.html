@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasm Klassifikatori</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #1a73e8; /* Google blue */
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button { /* Style the button part */
+            margin-right: 10px;
+            border: none;
+            background: #1a73e8;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #1558b3;
+        }
+
+        button {
+            background-color: #34a853; /* Google green */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2a8c4a;
+        }
+        .result-box {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e8f0fe; /* Light blue */
+            border: 1px solid #d2e3fc;
+            border-radius: 5px;
+        }
+        .error-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fdd; /* Light red */
+            border: 1px solid #fbb;
+            color: #d8000c; /* Dark red */
+            border-radius: 5px;
+        }
+        #uploadedImage {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rasm orqali bashorat qilish</h1>
+        <form action="/predict/" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Bashorat qilish</button>
+        </form>
+
+        {% if error %}
+            <div class="error-box">
+                <strong>Xatolik:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        {% if image_data %}
+            <div>
+                <h3>Yuklangan rasm:</h3>
+                <img id="uploadedImage" src="{{ image_data }}" alt="Yuklangan Rasm">
+            </div>
+        {% endif %}
+
+        {% if prediction %}
+            <div class="result-box">
+                <h3>Natija:</h3>
+                <p><strong>{{ prediction }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
